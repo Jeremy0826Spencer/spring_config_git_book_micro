@@ -1,5 +1,3 @@
-# discovery-server.yml
-
 server:
   port: 8761
 
@@ -9,6 +7,8 @@ spring:
 
   eureka:
     client:
+      service-url:
+        defaultZone: http://discovery-server:8761/eureka/  # Default Eureka server URL for other services
       register-with-eureka: false
       fetch-registry: false
     server:
