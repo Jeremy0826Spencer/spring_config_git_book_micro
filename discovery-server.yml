@@ -1,0 +1,38 @@
+# discovery-server.yml
+
+server:
+  port: 8761
+
+spring:
+  application:
+    name: discovery-server
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    enable-self-preservation: false
+  instance:
+    hostname: discovery-server
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    com:
+      south: DEBUG
+    org:
+      springframework: WARN
+  file:
+    name: /dev/stdout

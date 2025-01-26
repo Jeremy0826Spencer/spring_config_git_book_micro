@@ -1,0 +1,14 @@
+# discovery-server-docker.yml
+
+server:
+  port: 8761  # Ensure the port remains consistent
+
+spring:
+  application:
+    name: discovery-server
+
+  # Docker-specific configurations can be added here if needed
+  # For example, if you need to set a different hostname or other properties
+  eureka:
+    instance:
+      hostname: discovery-server  # Ensure it matches Docker network settings

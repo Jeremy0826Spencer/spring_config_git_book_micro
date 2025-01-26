@@ -1,0 +1,8 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://appdb:5432/books
+    username: postgres
+    password: password

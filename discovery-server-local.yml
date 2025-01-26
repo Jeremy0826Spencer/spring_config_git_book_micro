@@ -1,0 +1,11 @@
+# discovery-server-local.yml
+
+server:
+  port: 8761  # Ensure the port remains consistent
+
+spring:
+  application:
+    name: discovery-server
+
+  # If you have any local-specific configurations, add them here
+  # For example, if you use a different Eureka client configuration
