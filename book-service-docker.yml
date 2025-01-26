@@ -1,22 +1,13 @@
+# book-service-docker.yml
+
 spring:
-  application:
-    name: book-service
-
+  profiles: docker
   datasource:
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-      properties:
-        hibernate:
-          default_schema: public
-          dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
-
+    url: jdbc:postgresql://appdb:5432/postgres
+    username: postgres
+    password: password
   kafka:
     bootstrap-servers: kafka:9092
-
   cloud:
     stream:
       bindings:
@@ -24,6 +15,7 @@ spring:
           destination: book-deleted-topic
           contentType: application/json
         branchDeleted-out-0:
+          destination: branch-deleted-topic
           contentType: application/json
 
 eureka:
@@ -35,28 +27,3 @@ eureka:
   instance:
     hostname: book-service
     prefer-ip-address: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
-    metrics:
-      enabled: true
-
-logging:
-  level:
-    root: INFO
-    com:
-      south: DEBUG
-    org:
-      springframework:
-        WARN: WARN
-        kafka: INFO
-  file:
-    name: /dev/stdout
-    max-history: 7
-    max-size: 10MB

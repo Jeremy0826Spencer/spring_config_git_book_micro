@@ -7,14 +7,14 @@ spring:
   application:
     name: discovery-server
 
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-  server:
-    enable-self-preservation: false
-  instance:
-    hostname: discovery-server
+  eureka:
+    client:
+      register-with-eureka: false
+      fetch-registry: false
+    server:
+      enable-self-preservation: false
+    instance:
+      hostname: ${EUREKA_INSTANCE_HOSTNAME:discovery-server}  # Allows overriding via environment variable
 
 management:
   endpoints:
@@ -36,3 +36,5 @@ logging:
       springframework: WARN
   file:
     name: /dev/stdout
+    max-history: 7
+    max-size: 10MB
