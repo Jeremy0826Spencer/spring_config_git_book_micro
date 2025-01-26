@@ -3,14 +3,11 @@ spring:
     activate:
       on-profile: docker
 
-  eureka:
-    client:
-      service-url:
-        defaultZone: http://discovery-server:8761/eureka/  # Use the same default Zone for Docker profile
-      register-with-eureka: false
-      fetch-registry: false
-    instance:
-      hostname: discovery-server  # Matches Docker service name for hostname
-
-server:
-  port: 8761  # Ensures the port remains consistent
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+  instance:
+    hostname: discovery-server
