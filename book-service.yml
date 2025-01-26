@@ -7,7 +7,7 @@ spring:
   application:
     name: book-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/books
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: password
     driver-class-name: org.postgresql.Driver
