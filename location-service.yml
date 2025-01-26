@@ -24,8 +24,8 @@ spring:
   cloud:
     stream:
       bindings:
-        locationDeleted-out-0:
-          destination: location-deleted-topic
+        bookDeleted-out-0:
+          destination: book-deleted-topic
           contentType: application/json
         branchDeleted-out-0:
           destination: branch-deleted-topic

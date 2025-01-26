@@ -8,35 +8,29 @@ server:
 spring:
   application:
     name: inventory-service
-
-# PostgreSQL Database Configuration
   datasource:
-    url: jdbc:postgresql://inventorydb:5432/postgres
-    username: postgres
-    password: password
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/postgres
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:password}
     driver-class-name: org.postgresql.Driver
-
-# JPA/Hibernate Configuration
   jpa:
+    properties:
+      hibernate:
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
     hibernate:
       ddl-auto: update
-    show-sql: true
-
-# Kafka Configuration
   kafka:
-    bootstrap-servers: kafka:9092
-
-# Spring Cloud Stream Bindings
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
   cloud:
-    function:
-      definition: bookDeleted;branchDeleted
     stream:
       bindings:
-        branchDeleted-in-0:
-          destination: branch-deleted-topic
-          contentType: application/json
-        bookDeleted-in-0:
+        bookDeleted-out-0:
           destination: book-deleted-topic
+          contentType: application/json
+        branchDeleted-out-0:
+          destination: branch-deleted-topic
           contentType: application/json
 
 # Eureka Client Configuration
@@ -44,7 +38,7 @@ eureka:
   client:
     enabled: true
     service-url:
-      defaultZone: http://discovery-server:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
   instance:
