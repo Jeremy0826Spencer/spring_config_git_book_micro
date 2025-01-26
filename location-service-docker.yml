@@ -1,7 +1,9 @@
 # src/main/resources/location-service-docker.yml
 
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   datasource:
     url: jdbc:postgresql://locationdb:5432/branches
     username: postgres

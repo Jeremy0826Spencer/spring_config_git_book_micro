@@ -1,7 +1,9 @@
 # C:/Users/spenc/Desktop/SpringConfigGit/inventory-service-docker.yml
 
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   datasource:
     url: jdbc:postgresql://inventorydb:5432/inventory
     username: postgres

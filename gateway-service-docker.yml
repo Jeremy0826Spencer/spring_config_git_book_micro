@@ -1,7 +1,9 @@
 # gateway-service-docker.yml
 
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   cloud:
     gateway:
       globalcors:

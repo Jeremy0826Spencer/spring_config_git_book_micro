@@ -1,7 +1,9 @@
 # discovery-server-docker.yml
 
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
 
   eureka:
     instance:

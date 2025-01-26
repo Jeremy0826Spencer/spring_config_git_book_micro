@@ -1,7 +1,9 @@
 # book-service-docker.yml
 
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   datasource:
     url: jdbc:postgresql://bookdb:5432/books
     username: postgres
