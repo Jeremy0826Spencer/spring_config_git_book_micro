@@ -1,5 +1,3 @@
-# gateway-service.yml
-
 server:
   port: 8080
 
@@ -25,18 +23,19 @@ spring:
             allowedHeaders: "*"
             allowCredentials: true
     stream:
-      bindings:
+      bindings: # Placeholder for stream bindings (optional)
         # Define any stream bindings if necessary
 
-  eureka:
-    client:
-      service-url:
-        defaultZone: "${EUREKA_CLIENT_SERVICE_URL:http://localhost:8761/eureka/}"
-      register-with-eureka: "${EUREKA_CLIENT_REGISTER_WITH_EUREKA:true}"
-      fetch-registry: "${EUREKA_CLIENT_FETCH_REGISTRY:true}"
-    instance:
-      hostname: "${EUREKA_INSTANCE_HOSTNAME:gateway-service}"
-      prefer-ip-address: "${EUREKA_INSTANCE_PREFER_IP_ADDRESS:true}"
+# Eureka Client Configuration
+eureka:
+  client:
+    service-url:
+      defaultZone: "${EUREKA_CLIENT_SERVICE_URL:http://localhost:8761/eureka/}"
+    register-with-eureka: "${EUREKA_CLIENT_REGISTER_WITH_EUREKA:true}"
+    fetch-registry: "${EUREKA_CLIENT_FETCH_REGISTRY:true}"
+  instance:
+    hostname: "${EUREKA_INSTANCE_HOSTNAME:gateway-service}" # Changed from book-service
+    prefer-ip-address: "${EUREKA_INSTANCE_PREFER_IP_ADDRESS:true}"
 
 management:
   endpoints:

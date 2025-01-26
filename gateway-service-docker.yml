@@ -1,5 +1,3 @@
-# gateway-service-docker.yml
-
 spring:
   config:
     activate:
@@ -11,12 +9,12 @@ spring:
           '[/**]':
             allowedOrigins: "${GATEWAY_CORS_ALLOWED_ORIGINS:http://localhost:3000}" # Adjust if necessary
 
-    eureka:
-      client:
-        service-url:
-          defaultZone: "http://discovery-server:8761/eureka/"
-        register-with-eureka: true
-        fetch-registry: true
-      instance:
-        hostname: "gateway-service"
-        prefer-ip-address: true
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://discovery-server:8761/eureka/"
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: gateway-service
+    prefer-ip-address: true
