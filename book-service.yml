@@ -1,8 +1,68 @@
+# book-service.yml
+
 server:
   port: 8081
 
 spring:
+  application:
+    name: book-service
   datasource:
     url: jdbc:postgresql://appdb:5432/books
     username: postgres
     password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: kafka:9092
+  cloud:
+    stream:
+      bindings:
+        bookDeleted-out-0:
+          destination: book-deleted-topic
+        branchDeleted-out-0:
+          contentType: application/json
+
+# Eureka Client Configuration
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: book-service
+    prefer-ip-address: true
+
+# Actuator Endpoints Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com:
+      south: DEBUG
+    org:
+      springframework:
+        WARN: WARN
+        kafka: INFO
+  file:
+    name: /dev/stdout
+    max-history: 7
+    max-size: 10MB
