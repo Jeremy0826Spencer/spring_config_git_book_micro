@@ -7,16 +7,16 @@ spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:default}
 
+# Eureka Client Configuration
 eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:8761/eureka/}
-    register-with-eureka: ${EUREKA_CLIENT_REGISTER_WITH_EUREKA:false}
-    fetch-registry: ${EUREKA_CLIENT_FETCH_REGISTRY:false}
-  server:
-    enable-self-preservation: false
+    register-with-eureka: ${EUREKA_CLIENT_REGISTER_WITH_EUREKA:true}
+    fetch-registry: ${EUREKA_CLIENT_FETCH_REGISTRY:true}
   instance:
-    hostname: ${EUREKA_INSTANCE_HOSTNAME:discovery-server}
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:book-service}
+    prefer-ip-address: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:true}
 
 management:
   endpoints:
