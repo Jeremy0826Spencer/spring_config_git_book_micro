@@ -1,0 +1,26 @@
+# location-service-docker.yml
+
+spring:
+  profiles: docker
+  datasource:
+    url: jdbc:postgresql://locationdb:5432/branches
+    username: postgres
+    password: password
+  kafka:
+    bootstrap-servers: kafka:9092
+  cloud:
+    stream:
+      bindings:
+        branchDeleted-out-0:
+          destination: branch-deleted-topic
+          contentType: application/json
+
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://discovery-server:8761/eureka/"
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: "location-service"
+    prefer-ip-address: true
