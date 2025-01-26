@@ -1,30 +1,30 @@
-# src/main/resources/location-service-docker.yml
+# src/main/resources/inventory-service-docker.yml
 
 spring:
   profiles: docker
   datasource:
-    url: jdbc:postgresql://locationdb:5432/branches
+    url: jdbc:postgresql://inventorydb:5432/inventory
     username: postgres
     password: password
   kafka:
     bootstrap-servers: kafka:9092
+
   cloud:
     stream:
       bindings:
-        locationDeleted-out-0:
-          destination: location-deleted-topic
-          contentType: application/json
-        branchDeleted-out-0:
+        branchDeleted-in-0:
           destination: branch-deleted-topic
           contentType: application/json
+        bookDeleted-in-0:
+          destination: book-deleted-topic
+          contentType: application/json
 
-# Eureka Client Configuration
 eureka:
   client:
     service-url:
-      defaultZone: http://discovery-server:8761/eureka/
+      defaultZone: "http://discovery-server:8761/eureka/"
     register-with-eureka: true
     fetch-registry: true
   instance:
-    hostname: location-service
+    hostname: "inventory-service"
     prefer-ip-address: true

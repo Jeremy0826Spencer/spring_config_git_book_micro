@@ -1,48 +1,66 @@
-# src/main/resources/location-service.yml
+# src/main/resources/inventory-service.yml
 
+# Server Configuration
 server:
-  port: 8082
+  port: 8083
 
+# Application Name
 spring:
   application:
-    name: location-service
+    name: inventory-service
+  config:
+    import: "configserver:${CONFIG_SERVER_URL:http://localhost:8888}"
+  cloud:
+    config:
+      fail-fast: true
+
+# PostgreSQL Database Configuration
+spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:5432/branches
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/inventory
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:password}
     driver-class-name: org.postgresql.Driver
+
+# JPA/Hibernate Configuration
+spring:
   jpa:
-    properties:
-      hibernate:
-        default_schema: public
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
     hibernate:
       ddl-auto: update
+    show-sql: true
+
+# Kafka Configuration
+spring:
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+# Spring Cloud Stream Bindings
+spring:
   cloud:
+    function:
+      definition: bookDeleted;branchDeleted
     stream:
       bindings:
-        locationDeleted-out-0:
-          destination: location-deleted-topic
-          contentType: application/json
-        branchDeleted-out-0:
+        branchDeleted-in-0:
           destination: branch-deleted-topic
+          contentType: application/json
+        bookDeleted-in-0:
+          destination: book-deleted-topic
           contentType: application/json
 
 # Eureka Client Configuration
 eureka:
   client:
+    enabled: true
     service-url:
       defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:8761/eureka/}
     register-with-eureka: ${EUREKA_CLIENT_REGISTER_WITH_EUREKA:true}
     fetch-registry: ${EUREKA_CLIENT_FETCH_REGISTRY:true}
   instance:
-    hostname: ${EUREKA_INSTANCE_HOSTNAME:location-service}
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:inventory-service}
     prefer-ip-address: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:true}
 
-# Actuator Endpoints Configuration
+# Actuator Endpoints
 management:
   endpoints:
     web:
@@ -61,10 +79,9 @@ logging:
     com:
       south: DEBUG
     org:
-      springframework:
-        WARN: WARN
-        kafka: INFO
+      springframework: WARN
+      springframework.kafka: INFO
   file:
-    name: /dev/stdout
+    name: /dev/stdout  # Redirect logs to stdout for local development
     max-history: 7
     max-size: 10MB
