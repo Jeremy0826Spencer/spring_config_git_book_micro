@@ -11,7 +11,7 @@ spring:
 
 # PostgreSQL Database Configuration
   datasource:
-    url: jdbc:postgresql://inventorydb:5432/inventory
+    url: jdbc:postgresql://inventorydb:5432/postgres
     username: postgres
     password: password
     driver-class-name: org.postgresql.Driver
