@@ -3,7 +3,7 @@
 spring:
   profiles: docker
   datasource:
-    url: jdbc:postgresql://appdb:5432/postgres
+    url: jdbc:postgresql://bookdb:5432/books
     username: postgres
     password: password
   kafka:
