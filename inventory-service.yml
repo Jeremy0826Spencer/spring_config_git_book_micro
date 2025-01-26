@@ -1,4 +1,4 @@
-# src/main/resources/inventory-service.yml
+# C:/Users/spenc/Desktop/SpringConfigGit/inventory-service.yml
 
 # Server Configuration
 server:
@@ -8,34 +8,25 @@ server:
 spring:
   application:
     name: inventory-service
-  config:
-    import: "configserver:${CONFIG_SERVER_URL:http://localhost:8888}"
-  cloud:
-    config:
-      fail-fast: true
 
 # PostgreSQL Database Configuration
-spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:5432/inventory
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:password}
+    url: jdbc:postgresql://inventorydb:5432/inventory
+    username: postgres
+    password: password
     driver-class-name: org.postgresql.Driver
 
 # JPA/Hibernate Configuration
-spring:
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
 
 # Kafka Configuration
-spring:
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: kafka:9092
 
 # Spring Cloud Stream Bindings
-spring:
   cloud:
     function:
       definition: bookDeleted;branchDeleted
@@ -53,12 +44,12 @@ eureka:
   client:
     enabled: true
     service-url:
-      defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:8761/eureka/}
-    register-with-eureka: ${EUREKA_CLIENT_REGISTER_WITH_EUREKA:true}
-    fetch-registry: ${EUREKA_CLIENT_FETCH_REGISTRY:true}
+      defaultZone: http://discovery-server:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
   instance:
-    hostname: ${EUREKA_INSTANCE_HOSTNAME:inventory-service}
-    prefer-ip-address: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:true}
+    hostname: inventory-service
+    prefer-ip-address: true
 
 # Actuator Endpoints
 management:
@@ -82,6 +73,6 @@ logging:
       springframework: WARN
       springframework.kafka: INFO
   file:
-    name: /dev/stdout  # Redirect logs to stdout for local development
+    name: /dev/stdout
     max-history: 7
     max-size: 10MB

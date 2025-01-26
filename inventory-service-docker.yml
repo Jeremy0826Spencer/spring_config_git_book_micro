@@ -1,4 +1,4 @@
-# src/main/resources/inventory-service-docker.yml
+# C:/Users/spenc/Desktop/SpringConfigGit/inventory-service-docker.yml
 
 spring:
   profiles: docker
@@ -8,7 +8,6 @@ spring:
     password: password
   kafka:
     bootstrap-servers: kafka:9092
-
   cloud:
     stream:
       bindings:
